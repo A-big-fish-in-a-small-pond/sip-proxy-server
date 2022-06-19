@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sstPort = exports.sstIp = exports.accept = exports.contact = exports.twoH = exports.PORT = exports.IP = void 0;
+exports.IP = '202.30.249.45';
+exports.PORT = '9999';
+exports.twoH = 'SIP/2.0 200 OK';
+exports.contact = '<sip:202.30.249.33:9999>';
+exports.accept = 'application/sdp';
+exports.sstIp = '203.240.134.4';
+exports.sstPort = '5060';
