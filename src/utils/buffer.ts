@@ -7,10 +7,7 @@ export function joinBuffers(buffers: Buffer[],) {
 export function str2sip(str: string) : SipVO {
     let splitstr = str.split('\r\n')
 
-    let sip = function (this: SipVO) {
-      console.log(this)
-      console.log("hello world")
-    } as SipVO
+    let sip = function (this: SipVO) {} as SipVO
     
     splitstr.map((str: string, idx :number) => {
       if (idx == 0) {

@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "prestart": "tsc"
-},
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dgram": "^1.0.1",
-    "net": "^1.0.2"
+    "net": "^1.0.2",
+    "winston": "^3.7.2",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.42"

@@ -12,6 +12,7 @@ import { twhokService } from "../service/twhok";
 import { twhoksdpService } from "../service/twhoksdp";
 import { unknownService } from "../service/unknown";
 import { joinBuffers, str2sip } from "../utils/buffer";
+import { logger } from "../utils/logger";
 import { SessionVO } from "../vo/sessionVO";
 
 let beforeBuffer = Buffer.alloc(0)
@@ -48,7 +49,7 @@ async function methodRouter(chunk : Buffer, session: SessionVO) : Promise<void> 
             } else if (sip.method_s == '481 Call Leg/Transaction Does Not Exist') {
                 callLegService(sip, session)
             } else {
-                console.log(sip)
+                logger.info(`[doesnt existed sip method] - ${sip}`)
             }
 
             return;
@@ -69,13 +70,13 @@ async function methodRouter(chunk : Buffer, session: SessionVO) : Promise<void> 
             } else if (sip.method_s == '200 OK') {
                 twhoksdpService(sip, sdpstr, session)
             } else {
-                console.log(sip)
+                logger.info(`[doesnt existed sip method and sdp] - ${sip}`)
             }
         }
-
-       return;
+        
+       return; 
     } catch (err) {
-        console.log(err)
+        logger.error(`router parse error :\n${err}`)
         return;
 
     }

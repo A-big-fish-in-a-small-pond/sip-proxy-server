@@ -1,5 +1,6 @@
 // import net from "net";
 import methodRouter from "./router/router";
+import { logger } from "./utils/logger";
 
 // let server = net.createServer((socket) => {
 //     socket.on("data", (chunk) => {
@@ -17,11 +18,12 @@ import methodRouter from "./router/router";
 import dgram from 'dgram'
 import { getIp, getPort } from './utils/string';
 import { SessionVO } from "./vo/sessionVO";
+
 const server = dgram.createSocket('udp4');
 
 //에러 발생 시
 server.on('error', (err: Error) => {
-    console.log(`server error:\n${err.stack}`);
+    logger.error(`server error:\n${err.stack}`)
     server.close();
 });
 
@@ -50,7 +52,7 @@ server.on('message', (chunk: Buffer, info: dgram.RemoteInfo) => {
 //서버 start시 
 server.on('listening', () => {
     const address = server.address();
-    console.log(`server listening ${address.address}:${address.port} ---`);
+    logger.info(`server listening ${address.address}:${address.port} ---`)
 });
 
 server.bind(Number(getPort()), getIp());
