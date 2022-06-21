@@ -22,6 +22,7 @@ const twhok_1 = require("../service/twhok");
 const twhoksdp_1 = require("../service/twhoksdp");
 const unknown_1 = require("../service/unknown");
 const buffer_1 = require("../utils/buffer");
+const logger_1 = require("../utils/logger");
 let beforeBuffer = Buffer.alloc(0);
 function methodRouter(chunk, session) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -63,7 +64,7 @@ function methodRouter(chunk, session) {
                     (0, callLeg_1.callLegService)(sip, session);
                 }
                 else {
-                    console.log(sip);
+                    logger_1.logger.info(`[doesnt existed sip method] - ${sip}`);
                 }
                 return;
             }
@@ -84,13 +85,13 @@ function methodRouter(chunk, session) {
                     (0, twhoksdp_1.twhoksdpService)(sip, sdpstr, session);
                 }
                 else {
-                    console.log(sip);
+                    logger_1.logger.info(`[doesnt existed sip method and sdp] - ${sip}`);
                 }
             }
             return;
         }
         catch (err) {
-            console.log(err);
+            logger_1.logger.error(`router parse error :\n${err}`);
             return;
         }
     });

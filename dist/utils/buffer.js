@@ -7,10 +7,7 @@ function joinBuffers(buffers) {
 exports.joinBuffers = joinBuffers;
 function str2sip(str) {
     let splitstr = str.split('\r\n');
-    let sip = function () {
-        console.log(this);
-        console.log("hello world");
-    };
+    let sip = function () { };
     splitstr.map((str, idx) => {
         if (idx == 0) {
             let strArr = str.split(" ");
