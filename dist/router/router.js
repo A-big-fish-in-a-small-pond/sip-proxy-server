@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const ack_1 = require("../service/ack");
 const bye_1 = require("../service/bye");
+const callLeg_1 = require("../service/callLeg");
 const cancel_1 = require("../service/cancel");
 const invite_1 = require("../service/invite");
 const options_1 = require("../service/options");
@@ -57,6 +58,9 @@ function methodRouter(chunk, session) {
                 }
                 else if (sip.method_s == '401 Unknown SIP Server') {
                     (0, unknown_1.unknownService)(sip, session);
+                }
+                else if (sip.method_s == '481 Call Leg/Transaction Does Not Exist') {
+                    (0, callLeg_1.callLegService)(sip, session);
                 }
                 else {
                     console.log(sip);

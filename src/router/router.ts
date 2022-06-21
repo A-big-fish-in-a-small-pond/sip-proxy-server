@@ -1,6 +1,7 @@
 import { Socket } from "net";
 import { ackService } from "../service/ack";
 import { byeService } from "../service/bye";
+import { callLegService } from "../service/callLeg";
 import { cancelService } from "../service/cancel";
 import { invService } from "../service/invite";
 import { optService } from "../service/options";
@@ -44,6 +45,8 @@ async function methodRouter(chunk : Buffer, session: SessionVO) : Promise<void> 
                 byeService(sip, session)
             } else if (sip.method_s == '401 Unknown SIP Server') {
                 unknownService(sip, session)
+            } else if (sip.method_s == '481 Call Leg/Transaction Does Not Exist') {
+                callLegService(sip, session)
             } else {
                 console.log(sip)
             }
