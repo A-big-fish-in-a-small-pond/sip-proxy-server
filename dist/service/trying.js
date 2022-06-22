@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tryService = void 0;
+const const_1 = require("../const/const");
 const string_1 = require("../utils/string");
 function tryService(sip, session) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -23,7 +24,7 @@ function tryService(sip, session) {
         let k = 'k:' + sip.k;
         let server = 'Server: Junho PBX';
         // let contact = 'Contact: '+ sip.contact
-        let contact = 'Contact: ' + "<sip:202.30.249.45:9999;transport=UDP>";
+        let contact = 'Contact: ' + `<sip:${const_1.PROXY_IP}:${const_1.PROXY_PORT};transport=UDP>`;
         let context_length = 'Content-Length: 0';
         let response = (0, string_1.responser)([method, via, from, to, call_id, cseq, k, server, contact, context_length]);
         yield session.write(response);

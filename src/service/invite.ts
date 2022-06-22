@@ -1,31 +1,27 @@
-import { CalledSocket } from "../utils/client";
+// import { CalledSocket } from "../utils/client";
 import { getBranch, responser } from "../utils/string";
 import { SipVO } from "../vo/sipVO";
-import dgram from 'dgram'
+// import dgram from 'dgram'
 import { SessionVO } from "../vo/sessionVO";
+import { DEPARTURE_IP, DEPARTURE_PORT, PROXY_IP, PROXY_PORT, SST_IP, SST_PORT } from "../const/const";
 
-const client = dgram.createSocket('udp4');
-client.bind({
-    port: 5061,
-    address: "202.30.249.45"
-});
+// const client = dgram.createSocket('udp4');
+// client.bind({
+//     port: 5061,
+//     address: ""
+// });
 
-const called_socket = new CalledSocket(client);
+// const called_socket = new CalledSocket(client);
 
 export async function invService(sip : SipVO, sdp:string, session: SessionVO) : Promise<void> {
-    // options 받은 것을 허락하기 위해 200OK 를 날린다.:q
     let message = invitestr(sip, sdp)
-    // let a = await called_socket.send(message)
-    session.socket.send(message, 0, message.length, 5060, '203.240.134.4')
-
-    // let message2 = subscribestr(sip)
-    // session.socket.send(message2, 0, message2.length, 5060, '203.240.134.4')
+    session.socket.send(message, 0, message.length, Number(SST_PORT), SST_IP)
 }
 
 function invitestr (sip : SipVO, sdp : string) :string{
     let method = sip.method_t + " " + sip.method_s
-    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5070;branch=" + getBranch() + ";rport "
-    let via2 = "Via:" + sip.via + ";received=202.30.249.45;rport=9999"
+    let via1 = `Via: SIP/2.0/UDP ${DEPARTURE_IP}:${DEPARTURE_PORT};branch=` + getBranch() + ";rport "
+    let via2 = "Via:" + sip.via + `;received=${PROXY_IP};rport=${PROXY_PORT}`
     let from = "From:" + sip.from
     let to = "To:" + sip.to
     let call_id = 'Call-ID:' + sip.call_id
@@ -45,21 +41,3 @@ function invitestr (sip : SipVO, sdp : string) :string{
     return response
 }
 
-// function subscribestr(sip: SipVO) : string {
-//     let method = "SUBSCRIBE " + sip.method_s
-//     let via = "Via: SIP/2.0/UDP 202.30.249.33:5060;branch=" + getBranch() + ";rport "
-//     let from = "From: " + sip.from
-//     let to = "To:" + sip.to
-//     let call_id = 'Call-ID:' + sip.call_id
-//     let cseq = "CSeq:" + " 104 SUBSCRIBE"
-//     let contact = "Contact:"+ " <sip:0312700371@202.30.249.45:9999>"
-//     let event = "Event: telephone-event"
-//     let max_forwards = "Max-Forwards: " + Number(Number(sip.max_forwards.trim()) - 1)
-//     let expires = "Expires: 21600"
-//     let accept = "Accept: application/reginfo+xml"
-
-//     let response = responser([method, via, from, to, call_id, cseq, contact, event, max_forwards, expires, accept])
-
-//     return response
-
-// }

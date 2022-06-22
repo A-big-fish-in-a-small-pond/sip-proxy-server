@@ -30,7 +30,7 @@ class CalledSocket {
     }
     process(str, pending) {
         this.pending = pending;
-        this.socket.send(str, 0, str.length, Number(const_1.sstPort), const_1.sstIp);
+        this.socket.send(str, 0, str.length, Number(const_1.SST_PORT), const_1.SST_IP);
     }
     send(str) {
         return new Promise((resolve, reject) => {

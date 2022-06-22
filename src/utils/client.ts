@@ -1,5 +1,5 @@
 import dgram from 'dgram'
-import { sstIp, sstPort } from '../const/const';
+import { SST_IP, SST_PORT } from '../const/const';
 import { Callback } from '../vo/callbackVO';
 import { joinBuffers } from './buffer';
 
@@ -41,7 +41,7 @@ export class CalledSocket {
 
     process(str: string, pending: Callback) {
         this.pending = pending
-        this.socket.send(str, 0, str.length, Number(sstPort), sstIp)
+        this.socket.send(str, 0, str.length, Number(SST_PORT), SST_IP)
     }
 
     send(str : string) {

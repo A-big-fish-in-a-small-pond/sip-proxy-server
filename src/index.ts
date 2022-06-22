@@ -1,23 +1,8 @@
-// import net from "net";
 import methodRouter from "./router/router";
 import { logger } from "./utils/logger";
-
-// let server = net.createServer((socket) => {
-//     socket.on("data", (chunk) => {
-//         methodRouter(chunk, socket);
-//     });
-
-//     socket.on("end", function () {
-//         console.log("client`s socket connected end");
-//     });
-// });
-
-// console.log('this is proxy server')
-// server.listen(9999);
-
 import dgram from 'dgram'
-import { getIp, getPort } from './utils/string';
 import { SessionVO } from "./vo/sessionVO";
+import { DEPARTURE_IP, DEPARTURE_PORT, PROXY_IP, PROXY_PORT } from "./const/const";
 
 const server = dgram.createSocket('udp4');
 
@@ -34,7 +19,7 @@ server.on('message', (chunk: Buffer, info: dgram.RemoteInfo) => {
     session.socket = server
     session.write = (str) => {
         return new Promise((resolve, reject) => {
-            session.socket.send(str, 0, str.length, 5070, '202.30.249.33', (err : Error | null) => {
+            session.socket.send(str, 0, str.length, Number(DEPARTURE_PORT), DEPARTURE_IP, (err : Error | null) => {
                 if (err) {
                     return reject(err);
                 } else {
@@ -55,4 +40,4 @@ server.on('listening', () => {
     logger.info(`server listening ${address.address}:${address.port} ---`)
 });
 
-server.bind(Number(getPort()), getIp());
+server.bind(Number(PROXY_PORT), PROXY_IP);

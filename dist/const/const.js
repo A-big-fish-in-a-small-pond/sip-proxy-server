@@ -1,10 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sstPort = exports.sstIp = exports.accept = exports.contact = exports.twoH = exports.PORT = exports.IP = void 0;
-exports.IP = '202.30.249.45';
-exports.PORT = '9999';
-exports.twoH = 'SIP/2.0 200 OK';
-exports.contact = '<sip:202.30.249.33:9999>';
-exports.accept = 'application/sdp';
-exports.sstIp = '203.240.134.4';
-exports.sstPort = '5060';
+exports.DEPARTURE_PORT = exports.DEPARTURE_IP = exports.SST_PORT = exports.SST_IP = exports.PROXY_PORT = exports.PROXY_IP = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+exports.PROXY_IP = process.env.PROXY_IP;
+exports.PROXY_PORT = process.env.PROXY_PORT;
+exports.SST_IP = process.env.SST_IP;
+exports.SST_PORT = process.env.SST_PORT;
+exports.DEPARTURE_IP = process.env.DEPARTURE_IP;
+exports.DEPARTURE_PORT = process.env.DEPARTURE_PORT;

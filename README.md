@@ -15,5 +15,20 @@ Currently, this project is a SIP proxy server made exclusively for Sejong Teleco
 ## Start
 
 ```sh
+vi .env
+
+// and write that
+
+DEPARTURE_IP=''
+DEPARTURE_PORT=''
+
+PROXY_IP=''
+PROXY_PORT=''
+
+SST_IP=''
+SST_PORT=''
+```
+
+```sh
 npm start
 ```

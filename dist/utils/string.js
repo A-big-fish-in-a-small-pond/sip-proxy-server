@@ -1,27 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBranch = exports.getTag = exports.responser = exports.getAccept = exports.getContact = exports.getTwoH = exports.getPort = exports.getIp = void 0;
-const const_1 = require("../const/const");
-function getIp() {
-    return const_1.IP;
-}
-exports.getIp = getIp;
-function getPort() {
-    return const_1.PORT;
-}
-exports.getPort = getPort;
-function getTwoH() {
-    return const_1.twoH;
-}
-exports.getTwoH = getTwoH;
-function getContact() {
-    return const_1.contact;
-}
-exports.getContact = getContact;
-function getAccept() {
-    return const_1.accept;
-}
-exports.getAccept = getAccept;
+exports.getBranch = exports.getTag = exports.responser = void 0;
 function responser(param) {
     let str = '';
     for (let i = 0; i < param.length; i++) {

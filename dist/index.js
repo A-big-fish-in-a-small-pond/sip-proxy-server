@@ -3,21 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import net from "net";
 const router_1 = __importDefault(require("./router/router"));
 const logger_1 = require("./utils/logger");
-// let server = net.createServer((socket) => {
-//     socket.on("data", (chunk) => {
-//         methodRouter(chunk, socket);
-//     });
-//     socket.on("end", function () {
-//         console.log("client`s socket connected end");
-//     });
-// });
-// console.log('this is proxy server')
-// server.listen(9999);
 const dgram_1 = __importDefault(require("dgram"));
-const string_1 = require("./utils/string");
+const const_1 = require("./const/const");
 const server = dgram_1.default.createSocket('udp4');
 //에러 발생 시
 server.on('error', (err) => {
@@ -31,7 +20,7 @@ server.on('message', (chunk, info) => {
     session.socket = server;
     session.write = (str) => {
         return new Promise((resolve, reject) => {
-            session.socket.send(str, 0, str.length, 5070, '202.30.249.33', (err) => {
+            session.socket.send(str, 0, str.length, Number(const_1.DEPARTURE_PORT), const_1.DEPARTURE_IP, (err) => {
                 if (err) {
                     return reject(err);
                 }
@@ -48,4 +37,4 @@ server.on('listening', () => {
     const address = server.address();
     logger_1.logger.info(`server listening ${address.address}:${address.port} ---`);
 });
-server.bind(Number((0, string_1.getPort)()), (0, string_1.getIp)());
+server.bind(Number(const_1.PROXY_PORT), const_1.PROXY_IP);

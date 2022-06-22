@@ -1,9 +1,12 @@
-export const IP = '202.30.249.45'
-export const PORT = '9999'
+import env from 'dotenv'
 
-export const twoH = 'SIP/2.0 200 OK'
-export const contact = '<sip:202.30.249.33:9999>'
-export const accept = 'application/sdp'
+env.config()
 
-export const sstIp = '203.240.134.4'
-export const sstPort = '5060'
+export const PROXY_IP = process.env.PROXY_IP
+export const PROXY_PORT =  process.env.PROXY_PORT
+
+export const SST_IP = process.env.SST_IP
+export const SST_PORT =  process.env.SST_PORT
+
+export const DEPARTURE_IP = process.env.DEPARTURE_IP
+export const DEPARTURE_PORT = process.env.DEPARTURE_PORT

@@ -1,25 +1,3 @@
-import { accept, contact, IP, PORT, twoH } from "../const/const";
-
-export function getIp() : string {
-    return IP;
-}
-
-export function getPort() : string {
-    return PORT;
-}
-
-export function getTwoH() : string {
-    return twoH;
-}
-
-export function getContact() : string {
-    return contact
-}
-
-export function getAccept() :string {
-    return accept
-}
-
 export function responser(param:string[]) {
     let str = ''
 

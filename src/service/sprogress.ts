@@ -1,6 +1,7 @@
 import { getBranch, responser } from "../utils/string";
 import { SipVO } from "../vo/sipVO";
 import { SessionVO } from "../vo/sessionVO";
+import { PROXY_IP, PROXY_PORT } from "../const/const";
 
 
 export async function spService(sip : SipVO, sdp:string, session: SessionVO) : Promise<void> {
@@ -22,8 +23,7 @@ function spstr (sip : SipVO, sdp : string) :string{
     let server = 'Server:' + sip.server
     let k = 'k:' + sip.k
     let c = 'c:' + sip.c
-    // let contact = 'Contact:'+ sip.contact
-    let contact = 'Contact: '+ "<sip:202.30.249.45:9999;transport=UDP>"
+    let contact = 'Contact: '+ `<sip:${PROXY_IP}:${PROXY_PORT};transport=UDP>`
     let allow = 'Allow:'+ sip.allow
     let context_length = "Content-Length:" + sip.content_length
 
@@ -44,8 +44,7 @@ function spackstr (sip : SipVO, sdp : string) :string{
     let server = 'Server:' + sip.server
     let k = 'k:' + sip.k
     let c = 'c:' + sip.c
-    // let contact = 'Contact:'+ sip.contact
-    let contact = 'Contact: '+ "<sip:202.30.249.45:9999;transport=UDP>"
+    let contact = 'Contact: '+ `<sip:${PROXY_IP}:${PROXY_PORT};transport=UDP>`
     let allow = 'Allow:'+ sip.allow
     let context_length = "Content-Length:" + sip.content_length
 

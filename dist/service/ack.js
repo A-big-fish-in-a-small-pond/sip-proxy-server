@@ -11,18 +11,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ackService = void 0;
 const string_1 = require("../utils/string");
+const const_1 = require("../const/const");
 function ackService(sip, session) {
     return __awaiter(this, void 0, void 0, function* () {
         // options 받은 것을 허락하기 위해 200OK 를 날린다.:q
         let message = ackstr(sip);
-        session.socket.send(message, 0, message.length, 5060, '203.240.134.4');
+        session.socket.send(message, 0, message.length, Number(const_1.SST_PORT), const_1.SST_IP);
     });
 }
 exports.ackService = ackService;
 function ackstr(sip) {
     let method = sip.method_t + " " + sip.method_s;
-    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5070;branch=" + (0, string_1.getBranch)();
-    let via2 = "Via:" + sip.via + ";received=202.30.249.45";
+    let via1 = `Via: SIP/2.0/UDP ${const_1.DEPARTURE_IP}:${const_1.DEPARTURE_PORT};branch=` + (0, string_1.getBranch)();
+    let via2 = "Via:" + sip.via + `;received=${const_1.PROXY_IP}`;
     let from = "From:" + sip.from;
     let to = "To:" + sip.to;
     let call_id = 'Call-ID:' + sip.call_id;

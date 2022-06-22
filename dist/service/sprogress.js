@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.spService = void 0;
 const string_1 = require("../utils/string");
+const const_1 = require("../const/const");
 function spService(sip, sdp, session) {
     return __awaiter(this, void 0, void 0, function* () {
         // options 받은 것을 허락하기 위해 200OK 를 날린다.:q
@@ -31,8 +32,7 @@ function spstr(sip, sdp) {
     let server = 'Server:' + sip.server;
     let k = 'k:' + sip.k;
     let c = 'c:' + sip.c;
-    // let contact = 'Contact:'+ sip.contact
-    let contact = 'Contact: ' + "<sip:202.30.249.45:9999;transport=UDP>";
+    let contact = 'Contact: ' + `<sip:${const_1.PROXY_IP}:${const_1.PROXY_PORT};transport=UDP>`;
     let allow = 'Allow:' + sip.allow;
     let context_length = "Content-Length:" + sip.content_length;
     let response = (0, string_1.responser)([method, via, from, to, call_id, cseq, server, k, c, contact, allow, context_length]);
@@ -49,8 +49,7 @@ function spackstr(sip, sdp) {
     let server = 'Server:' + sip.server;
     let k = 'k:' + sip.k;
     let c = 'c:' + sip.c;
-    // let contact = 'Contact:'+ sip.contact
-    let contact = 'Contact: ' + "<sip:202.30.249.45:9999;transport=UDP>";
+    let contact = 'Contact: ' + `<sip:${const_1.PROXY_IP}:${const_1.PROXY_PORT};transport=UDP>`;
     let allow = 'Allow:' + sip.allow;
     let context_length = "Content-Length:" + sip.content_length;
     let response = (0, string_1.responser)([method, via, from, to, call_id, cseq, server, k, c, contact, allow, context_length]);
