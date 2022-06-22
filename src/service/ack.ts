@@ -10,7 +10,7 @@ export async function ackService(sip : SipVO, session: SessionVO) : Promise<void
 
 function ackstr (sip : SipVO) :string{
     let method = sip.method_t + " " + sip.method_s
-    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5060;branch=" + getBranch() 
+    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5070;branch=" + getBranch() 
     let via2 = "Via:" + sip.via + ";received=202.30.249.45"
     let from = "From:" + sip.from
     let to = "To:" + sip.to

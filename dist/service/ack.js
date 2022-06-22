@@ -21,7 +21,7 @@ function ackService(sip, session) {
 exports.ackService = ackService;
 function ackstr(sip) {
     let method = sip.method_t + " " + sip.method_s;
-    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5060;branch=" + (0, string_1.getBranch)();
+    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5070;branch=" + (0, string_1.getBranch)();
     let via2 = "Via:" + sip.via + ";received=202.30.249.45";
     let from = "From:" + sip.from;
     let to = "To:" + sip.to;

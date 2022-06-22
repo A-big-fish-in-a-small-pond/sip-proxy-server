@@ -24,7 +24,7 @@ export async function invService(sip : SipVO, sdp:string, session: SessionVO) : 
 
 function invitestr (sip : SipVO, sdp : string) :string{
     let method = sip.method_t + " " + sip.method_s
-    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5060;branch=" + getBranch() + ";rport "
+    let via1 = "Via: SIP/2.0/UDP 202.30.249.33:5070;branch=" + getBranch() + ";rport "
     let via2 = "Via:" + sip.via + ";received=202.30.249.45;rport=9999"
     let from = "From:" + sip.from
     let to = "To:" + sip.to

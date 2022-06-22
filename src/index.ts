@@ -34,7 +34,7 @@ server.on('message', (chunk: Buffer, info: dgram.RemoteInfo) => {
     session.socket = server
     session.write = (str) => {
         return new Promise((resolve, reject) => {
-            session.socket.send(str, 0, str.length, 5060, '202.30.249.33', (err : Error | null) => {
+            session.socket.send(str, 0, str.length, 5070, '202.30.249.33', (err : Error | null) => {
                 if (err) {
                     return reject(err);
                 } else {

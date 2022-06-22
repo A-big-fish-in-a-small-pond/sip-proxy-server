@@ -31,7 +31,7 @@ server.on('message', (chunk, info) => {
     session.socket = server;
     session.write = (str) => {
         return new Promise((resolve, reject) => {
-            session.socket.send(str, 0, str.length, 5060, '202.30.249.33', (err) => {
+            session.socket.send(str, 0, str.length, 5070, '202.30.249.33', (err) => {
                 if (err) {
                     return reject(err);
                 }
