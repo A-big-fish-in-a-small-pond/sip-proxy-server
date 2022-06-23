@@ -6,6 +6,7 @@ import { cancelService } from "../service/cancel";
 import { invService } from "../service/invite";
 import { optService } from "../service/options";
 import { requestTerminateService } from "../service/requestterminate";
+import { serviceUnavailableService } from "../service/serviceUnavailable";
 import { spService } from "../service/sprogress";
 import { tryService } from "../service/trying";
 import { twhokService } from "../service/twhok";
@@ -33,7 +34,7 @@ async function methodRouter(chunk : Buffer, session: SessionVO) : Promise<void> 
             } else if (sip.method_s == '100 Trying') {
                 tryService(sip, session)
             } else if (sip.method_s == '503 Service Unavailable') {
-                session.write(chunk.toString())
+                serviceUnavailableService(sip, session)
             } else if (sip.method_t == 'CANCEL') {
                 cancelService(sip, session)
             } else if (sip.method_s == '200 OK') {
@@ -49,7 +50,7 @@ async function methodRouter(chunk : Buffer, session: SessionVO) : Promise<void> 
             } else if (sip.method_s == '481 Call Leg/Transaction Does Not Exist') {
                 callLegService(sip, session)
             } else {
-                logger.info(`[doesnt existed sip method] - ${sip}`)
+                logger.info(`[doesnt existed sip method] - ${JSON.stringify(sip)}`)
             }
 
             return;
@@ -70,7 +71,7 @@ async function methodRouter(chunk : Buffer, session: SessionVO) : Promise<void> 
             } else if (sip.method_s == '200 OK') {
                 twhoksdpService(sip, sdpstr, session)
             } else {
-                logger.info(`[doesnt existed sip method and sdp] - ${sip}`)
+                logger.info(`[doesnt existed sip method and sdp] - ${JSON.stringify(sip)}`)
             }
         }
         

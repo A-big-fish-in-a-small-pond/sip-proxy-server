@@ -16,6 +16,7 @@ const cancel_1 = require("../service/cancel");
 const invite_1 = require("../service/invite");
 const options_1 = require("../service/options");
 const requestterminate_1 = require("../service/requestterminate");
+const serviceUnavailable_1 = require("../service/serviceUnavailable");
 const sprogress_1 = require("../service/sprogress");
 const trying_1 = require("../service/trying");
 const twhok_1 = require("../service/twhok");
@@ -40,7 +41,7 @@ function methodRouter(chunk, session) {
                     (0, trying_1.tryService)(sip, session);
                 }
                 else if (sip.method_s == '503 Service Unavailable') {
-                    session.write(chunk.toString());
+                    (0, serviceUnavailable_1.serviceUnavailableService)(sip, session);
                 }
                 else if (sip.method_t == 'CANCEL') {
                     (0, cancel_1.cancelService)(sip, session);
@@ -64,7 +65,7 @@ function methodRouter(chunk, session) {
                     (0, callLeg_1.callLegService)(sip, session);
                 }
                 else {
-                    logger_1.logger.info(`[doesnt existed sip method] - ${sip}`);
+                    logger_1.logger.info(`[doesnt existed sip method] - ${JSON.stringify(sip)}`);
                 }
                 return;
             }
@@ -85,7 +86,7 @@ function methodRouter(chunk, session) {
                     (0, twhoksdp_1.twhoksdpService)(sip, sdpstr, session);
                 }
                 else {
-                    logger_1.logger.info(`[doesnt existed sip method and sdp] - ${sip}`);
+                    logger_1.logger.info(`[doesnt existed sip method and sdp] - ${JSON.stringify(sip)}`);
                 }
             }
             return;

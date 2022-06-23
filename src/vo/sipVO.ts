@@ -16,7 +16,10 @@ export interface SipVO extends SipFunction {
     date: string,
     allow: string,
     supported: string,
+    
     content_length: string,
+    
+    reason?: string,
     content_type?: string,
     k?: string,
     c?: string,
